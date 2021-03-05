@@ -18,57 +18,59 @@ const Keyboard = () => {
     console.log(mouse.x / mouse.elementWidth, mouse.y / mouse.elementHeight)
 
     return (
+        <div className={styles.keyboardContainer}>
             <Grid
-              container
-              direction="column"
-              justify="space-evenly"
-              alignItems="stretch"
-              spacing={0}>
+                container
+                direction="column"
+                justify="space-evenly"
+                alignItems="stretch"
+                spacing={1}>
                 <Grid item xs={12}>
-                    <Paper className={styles.paper}>xs=12</Paper>
+                    <Paper elevation={3} className={styles.paper}>Keyboard text goes here...</Paper>
                 </Grid>
-                <Grid container item spacing={0}>
+                <Grid container item spacing={1}>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>Suggestion 1</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>Suggestion 2</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>Suggestion 3</Paper>
                     </Grid>
                 </Grid>
 
-                <Grid container item spacing={0} ref={target}>
+                <Grid container item spacing={1} ref={target}>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>A B C</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>D E F</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>G H I</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>J K L</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}> </Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>M N O</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>P Q R S</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>T U V</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={styles.paper}>xs=6</Paper>
+                        <Paper elevation={3} className={styles.paper}>W X Y Z</Paper>
                     </Grid>
                 </Grid>
             </Grid>
+        </div>
     );
 }
 

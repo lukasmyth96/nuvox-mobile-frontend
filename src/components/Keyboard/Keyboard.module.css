@@ -1,6 +1,14 @@
+.keyboardContainer{
+    /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .paper{
     text-align: center;
-    height: 20vh;
-    border: 1px black solid;
+    height: 15vh;
 }
