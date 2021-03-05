@@ -1,4 +1,4 @@
-const Home = () => {
+const Keyboard = () => {
     return (
         <h1>
             Hello World
@@ -6,5 +6,5 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Keyboard;
 
