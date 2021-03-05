@@ -18,7 +18,7 @@ const Keyboard = () => {
 
     if (mouse.isDown) {
         // An array is a terrible data structure for this :P
-        if (drawPts.current.length === 30) drawPts.current.shift();
+        if (drawPts.current.length === 50) drawPts.current.shift();
         drawPts.current.push(mouse);
     } else{
         drawPts.current = [];
@@ -28,7 +28,8 @@ const Keyboard = () => {
 
     for (let i = 0; i < drawPts.current.length; i++) {
         const {pageX, pageY } = drawPts.current[i];
-        const transparency = 0.5 + 0.5 * (i / 30);
+        const transparency = 0.5 + 0.5 * (i / 50);
+        const size = Math.round(1 + 5 * (i / 50));
 
         drawing.push(
             <div
@@ -37,8 +38,8 @@ const Keyboard = () => {
                     position: "absolute",
                     left: pageX,
                     top: pageY,
-                    width: 12,
-                    height: 12,
+                    width: size,
+                    height: size,
                     backgroundColor: `rgba(255, 80, 80, ${transparency})`,
                     borderRadius: "50%",
                     boxShadow: `0px 0px 5px 5px rgba(255, 80, 80, ${transparency})`
