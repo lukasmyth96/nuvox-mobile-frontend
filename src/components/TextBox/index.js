@@ -8,7 +8,7 @@ const TextBox = ({textValue}) => {
     return (
         <Grid item xs={12}>
             <Paper elevation={3} className={styles.paper}>
-                <textarea className={styles.textArea} rows={3} value={textValue}/>
+                <textarea className={styles.textArea} rows={3} value={textValue} readOnly/>
             </Paper>
         </Grid>
     );

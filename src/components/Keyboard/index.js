@@ -1,13 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef,  } from "react";
 import useMouse from "@react-hook/mouse-position";
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import axios from "../../axiosInstance";
 import styles from './Keyboard.module.css'
-import MouseTrail from "../MouseTrail";
 import TextBox from "../TextBox";
 import Suggestions from "../Suggestions";
+import SwipeKeyPad from "../SwipeKeyPad";
 
 
 const Keyboard = () => {
@@ -59,37 +58,7 @@ const Keyboard = () => {
                 spacing={1}>
                 <TextBox textValue="Hello world" />
                 <Suggestions/>
-
-                <Grid container item spacing={1} ref={useMouseTarget}>
-                    <MouseTrail mouse={mouse} mouseTrailPoints={mouseTrailPoints} />
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>A B C</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>D E F</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>G H I</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>J K L</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}> </Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>M N O</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>P Q R S</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>T U V</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>W X Y Z</Paper>
-                    </Grid>
-                </Grid>
+                <SwipeKeyPad mouse={mouse} mouseTrailPoints={mouseTrailPoints} useMouseTarget={useMouseTarget} />
             </Grid>
         </div>
     );
