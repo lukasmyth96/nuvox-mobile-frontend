@@ -1,51 +1,85 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import useMouse from "@react-hook/mouse-position";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+import axios from "../../axiosInstance";
 import styles from './Keyboard.module.css'
 
 
 const Keyboard = () => {
 
+    const trace = useRef([]);
     const target = useRef(null);
-    let drawPts = React.useRef([]);
     const mouse = useMouse(target, {
         fps: Infinity,
         enterDelay: 0,
         leaveDelay: 0
     });
 
+        // Get prediction
+    if (!mouse.isDown && trace.current.length > 0) {
+        console.log('Sending request!')
+        const payload = {
+            prompt: "Hello what is your",
+            trace: trace
+        }
+        axios.post("/api/predict/", payload)
+            .then(
+                (response) => {
+                    console.log(response.data.predicted_words[0]);
+                }
+            )
+            .catch(
+                error => alert('Request failed!')
+            )
+            .finally(
+                () => {
+                    trace.current = [];
+                }
+            )
+    }
+
+    if (mouse.isDown && (mouse.x !== null && mouse.y !== null)) {
+        trace.current.push(
+            {
+                x: (mouse.x / mouse.elementWidth),
+                y: (mouse.y / mouse.elementHeight),
+                t: 0
+            }
+        )
+        console.log(trace.current);
+    }
+
+    let drawPts = useRef([]);
+    const drawing = [];
     if (mouse.isDown) {
         // An array is a terrible data structure for this :P
         if (drawPts.current.length === 50) drawPts.current.shift();
         drawPts.current.push(mouse);
-    } else{
+        for (let i = 0; i < drawPts.current.length; i++) {
+            const {pageX, pageY } = drawPts.current[i];
+            const transparency = 0.5 + 0.5 * (i / 50);
+            const size = Math.round(1 + 5 * (i / 50));
+
+            drawing.push(
+                <div
+                    key={i}
+                    style={{
+                        position: "absolute",
+                        left: pageX,
+                        top: pageY,
+                        width: size,
+                        height: size,
+                        backgroundColor: `rgba(255, 80, 80, ${transparency})`,
+                        borderRadius: "50%",
+                        boxShadow: `0px 0px 5px 5px rgba(255, 80, 80, ${transparency})`
+                    }}
+                />
+            );
+        }
+    } else {
         drawPts.current = [];
-    }
-
-    const drawing = [];
-
-    for (let i = 0; i < drawPts.current.length; i++) {
-        const {pageX, pageY } = drawPts.current[i];
-        const transparency = 0.5 + 0.5 * (i / 50);
-        const size = Math.round(1 + 5 * (i / 50));
-
-        drawing.push(
-            <div
-                key={i}
-                style={{
-                    position: "absolute",
-                    left: pageX,
-                    top: pageY,
-                    width: size,
-                    height: size,
-                    backgroundColor: `rgba(255, 80, 80, ${transparency})`,
-                    borderRadius: "50%",
-                    boxShadow: `0px 0px 5px 5px rgba(255, 80, 80, ${transparency})`
-                }}
-            />
-        );
     }
 
     return (
