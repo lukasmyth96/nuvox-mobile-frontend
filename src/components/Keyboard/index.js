@@ -31,9 +31,20 @@ const Keyboard = () => {
         axios.post("/api/predict/", payload)
             .then(
                 (response) => {
-                    const predictedWord = response.data.predicted_words[0];
-                    console.log(predictedWord);
-                    setText(currentText => currentText + predictedWord);
+                    const action = response.data.action;
+                    if (action === 'type'){
+                        // Add predicted word to sentence.
+                        const predictedWord = response.data.predicted_words[0];
+                        setText(currentText => currentText + predictedWord);
+                    } else if (action === 'delete'){
+                        // Delete last predicted word.
+                        setText(currentText => {
+                                const words = currentText.split(' ');
+                                words.pop();
+                                return words.join(' ');
+                            }
+                        )
+                    }
                 }
             )
             .catch(
