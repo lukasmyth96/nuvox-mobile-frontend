@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import axios from "../../axiosInstance";
 import styles from './Keyboard.module.css'
 import MouseTrail from "../MouseTrail";
+import TextBox from "../TextBox";
 
 
 const Keyboard = () => {
@@ -19,10 +20,10 @@ const Keyboard = () => {
         leaveDelay: 0
     });
 
-        // Get prediction
+    // Get prediction
     if (!mouse.isDown && trace.current.length > 0) {
         const payload = {
-            prompt: "Hello what is your",
+            prompt: "",
             trace: [...trace.current]
         }
         trace.current = [];
@@ -55,9 +56,7 @@ const Keyboard = () => {
                 justify="space-evenly"
                 alignItems="stretch"
                 spacing={1}>
-                <Grid item xs={12}>
-                    <Paper elevation={3} className={styles.paper}>Keyboard text goes here...</Paper>
-                </Grid>
+                <TextBox textValue="Hello world" />
                 <Grid container item spacing={1}>
                     <Grid item xs={4}>
                         <Paper elevation={3} className={styles.paper}>Suggestion 1</Paper>
