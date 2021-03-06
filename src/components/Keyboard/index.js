@@ -1,4 +1,4 @@
-import React, { useRef,  } from "react";
+import React, { useRef, useState} from "react";
 import useMouse from "@react-hook/mouse-position";
 import Grid from '@material-ui/core/Grid';
 
@@ -10,6 +10,7 @@ import SwipeKeyPad from "../SwipeKeyPad";
 
 
 const Keyboard = () => {
+    let [text, setText] = useState("");
 
     let trace = useRef([]);
     let mouseTrailPoints = useRef([]);
@@ -30,7 +31,9 @@ const Keyboard = () => {
         axios.post("/api/predict/", payload)
             .then(
                 (response) => {
-                    console.log(response.data.predicted_words[0]);
+                    const predictedWord = response.data.predicted_words[0];
+                    console.log(predictedWord);
+                    setText(currentText => `${currentText} ${predictedWord}`)
                 }
             )
             .catch(
@@ -56,7 +59,7 @@ const Keyboard = () => {
                 justify="space-evenly"
                 alignItems="stretch"
                 spacing={1}>
-                <TextBox textValue="Hello world" />
+                <TextBox textValue={text} />
                 <Suggestions/>
                 <SwipeKeyPad mouse={mouse} mouseTrailPoints={mouseTrailPoints} useMouseTarget={useMouseTarget} />
             </Grid>
