@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import styles from "../Keyboard/Keyboard.module.css";
+import styles from "./Key.module.css";
 
 const Key = ({contents, onClick}) => {
 
