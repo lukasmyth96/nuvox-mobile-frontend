@@ -46,8 +46,10 @@ const Keyboard = () => {
                     if (action === 'type') {
                         // Add predicted word to sentence.
                         const predictedWords = response.data.predicted_words;
-                        setText(currentText => currentText + predictedWords[0]);
-                        setSuggestions(predictedWords.slice(1, 4));
+                        if (predictedWords.length){
+                            setText(currentText => currentText + predictedWords[0]);
+                            setSuggestions(predictedWords.slice(1, 4));
+                        }
                     } else if (action === 'delete') {
                         // Delete last predicted word.
                         setText(currentText => removeLastWord(currentText))
