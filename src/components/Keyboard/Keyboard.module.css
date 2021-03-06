@@ -7,3 +7,27 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+@media all and (min-width: 640px) and (max-width: 900px) {
+  .keyboardContainer {
+   margin: 0 200px;
+  }
+}
+
+@media all and (min-width: 900px) and (max-width: 1200px) {
+  .keyboardContainer {
+   margin: 0 300px;
+  }
+}
+
+@media all and (min-width: 1200px) and (max-width: 1600px) {
+  .keyboardContainer {
+   margin: 0 450px;
+  }
+}
+
+@media all and (min-width: 1600px) {
+  .keyboardContainer {
+   margin: 0 500px;
+  }
+}
