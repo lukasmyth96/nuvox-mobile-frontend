@@ -7,6 +7,7 @@ import axios from "../../axiosInstance";
 import styles from './Keyboard.module.css'
 import MouseTrail from "../MouseTrail";
 import TextBox from "../TextBox";
+import Suggestions from "../Suggestions";
 
 
 const Keyboard = () => {
@@ -57,17 +58,7 @@ const Keyboard = () => {
                 alignItems="stretch"
                 spacing={1}>
                 <TextBox textValue="Hello world" />
-                <Grid container item spacing={1}>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>Suggestion 1</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>Suggestion 2</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} className={styles.paper}>Suggestion 3</Paper>
-                    </Grid>
-                </Grid>
+                <Suggestions/>
 
                 <Grid container item spacing={1} ref={useMouseTarget}>
                     <MouseTrail mouse={mouse} mouseTrailPoints={mouseTrailPoints} />
