@@ -1,17 +1,19 @@
-import React, {useRef, useState} from "react";
+import React, { useRef } from "react";
 import useMouse from "@react-hook/mouse-position";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import axios from "../../axiosInstance";
 import styles from './Keyboard.module.css'
+import MouseTrail from "../MouseTrail";
 
 
 const Keyboard = () => {
 
-    const trace = useRef([]);
-    const target = useRef(null);
-    const mouse = useMouse(target, {
+    let trace = useRef([]);
+    let mouseTrailPoints = useRef([]);
+    let useMouseTarget = useRef(null);
+    const mouse = useMouse(useMouseTarget, {
         fps: Infinity,
         enterDelay: 0,
         leaveDelay: 0
@@ -45,37 +47,6 @@ const Keyboard = () => {
         )
     }
 
-    let drawPts = useRef([]);
-    const drawing = [];
-    if (mouse.isDown) {
-        // An array is a terrible data structure for this :P
-        if (drawPts.current.length === 50) drawPts.current.shift();
-        drawPts.current.push(mouse);
-        for (let i = 0; i < drawPts.current.length; i++) {
-            const {pageX, pageY } = drawPts.current[i];
-            const transparency = 0.5 + 0.5 * (i / 50);
-            const size = Math.round(1 + 5 * (i / 50));
-
-            drawing.push(
-                <div
-                    key={i}
-                    style={{
-                        position: "absolute",
-                        left: pageX,
-                        top: pageY,
-                        width: size,
-                        height: size,
-                        backgroundColor: `rgba(255, 80, 80, ${transparency})`,
-                        borderRadius: "50%",
-                        boxShadow: `0px 0px 5px 5px rgba(255, 80, 80, ${transparency})`
-                    }}
-                />
-            );
-        }
-    } else {
-        drawPts.current = [];
-    }
-
     return (
         <div className={styles.keyboardContainer}>
             <Grid
@@ -99,8 +70,8 @@ const Keyboard = () => {
                     </Grid>
                 </Grid>
 
-                <Grid container item spacing={1} ref={target}>
-                    {drawing}
+                <Grid container item spacing={1} ref={useMouseTarget}>
+                    <MouseTrail mouse={mouse} mouseTrailPoints={mouseTrailPoints} />
                     <Grid item xs={4}>
                         <Paper elevation={3} className={styles.paper}>A B C</Paper>
                     </Grid>
