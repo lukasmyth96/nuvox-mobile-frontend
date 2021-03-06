@@ -22,7 +22,6 @@ const replaceLastWord = (text, replacement) => {
 const Keyboard = () => {
     let [text, setText] = useState("");
     let [suggestions, setSuggestions] = useState([]);
-
     let trace = useRef([]);
     let mouseTrailPoints = useRef([]);
     let useMouseTarget = useRef(null);
@@ -57,7 +56,7 @@ const Keyboard = () => {
                 }
             )
             .catch(
-                error => console.log('Request failed!')
+                error => alert(error.message)
             )
     }
 
