@@ -8,6 +8,12 @@ import TextBox from "../TextBox";
 import Suggestions from "../Suggestions";
 import SwipeKeyPad from "../SwipeKeyPad";
 
+const removeLastWord = text => {
+    const words = text.split(' ');
+    words.pop();
+    return words.join(' ');
+}
+
 
 const Keyboard = () => {
     let [text, setText] = useState("");
@@ -38,12 +44,7 @@ const Keyboard = () => {
                         setText(currentText => currentText + predictedWord);
                     } else if (action === 'delete'){
                         // Delete last predicted word.
-                        setText(currentText => {
-                                const words = currentText.split(' ');
-                                words.pop();
-                                return words.join(' ');
-                            }
-                        )
+                        setText(currentText => removeLastWord(currentText))
                     }
                 }
             )
