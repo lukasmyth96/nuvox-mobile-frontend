@@ -1,4 +1,4 @@
-import React, { useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import useMouse from "@react-hook/mouse-position";
 import Grid from '@material-ui/core/Grid';
 
@@ -14,9 +14,14 @@ const removeLastWord = text => {
     return words.join(' ');
 }
 
+const replaceLastWord = (text, replacement) => {
+    return removeLastWord(text) + replacement;
+}
+
 
 const Keyboard = () => {
     let [text, setText] = useState("");
+    let [suggestions, setSuggestions] = useState(["One", "Two", "Three"]);
 
     let trace = useRef([]);
     let mouseTrailPoints = useRef([]);
@@ -38,11 +43,11 @@ const Keyboard = () => {
             .then(
                 (response) => {
                     const action = response.data.action;
-                    if (action === 'type'){
+                    if (action === 'type') {
                         // Add predicted word to sentence.
                         const predictedWord = response.data.predicted_words[0];
                         setText(currentText => currentText + predictedWord);
-                    } else if (action === 'delete'){
+                    } else if (action === 'delete') {
                         // Delete last predicted word.
                         setText(currentText => removeLastWord(currentText))
                     }
@@ -71,9 +76,15 @@ const Keyboard = () => {
                 justify="space-evenly"
                 alignItems="stretch"
                 spacing={1}>
-                <TextBox textValue={text} />
-                <Suggestions/>
-                <SwipeKeyPad mouse={mouse} mouseTrailPoints={mouseTrailPoints} useMouseTarget={useMouseTarget} />
+                <TextBox
+                    textValue={text}/>
+                <Suggestions
+                    suggestions={suggestions}
+                    onSuggestionClicked={(suggestion) => setText(currentText => replaceLastWord(currentText, suggestion))}/>
+                <SwipeKeyPad
+                    mouse={mouse}
+                    mouseTrailPoints={mouseTrailPoints}
+                    useMouseTarget={useMouseTarget}/>
             </Grid>
         </div>
     );
