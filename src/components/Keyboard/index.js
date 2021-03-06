@@ -19,7 +19,6 @@ const Keyboard = () => {
 
         // Get prediction
     if (!mouse.isDown && trace.current.length > 0) {
-        console.log('Sending request!')
         const payload = {
             prompt: "Hello what is your",
             trace: [...trace.current]
@@ -44,7 +43,6 @@ const Keyboard = () => {
                 t: 0
             }
         )
-        console.log(trace.current);
     }
 
     let drawPts = useRef([]);
