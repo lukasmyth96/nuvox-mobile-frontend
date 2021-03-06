@@ -15,13 +15,13 @@ const removeLastWord = text => {
 }
 
 const replaceLastWord = (text, replacement) => {
-    return removeLastWord(text) + replacement;
+    return replacement ? (removeLastWord(text) + replacement) : text;
 }
 
 
 const Keyboard = () => {
     let [text, setText] = useState("");
-    let [suggestions, setSuggestions] = useState(["One", "Two", "Three"]);
+    let [suggestions, setSuggestions] = useState([]);
 
     let trace = useRef([]);
     let mouseTrailPoints = useRef([]);
@@ -45,8 +45,9 @@ const Keyboard = () => {
                     const action = response.data.action;
                     if (action === 'type') {
                         // Add predicted word to sentence.
-                        const predictedWord = response.data.predicted_words[0];
-                        setText(currentText => currentText + predictedWord);
+                        const predictedWords = response.data.predicted_words;
+                        setText(currentText => currentText + predictedWords[0]);
+                        setSuggestions(predictedWords.slice(1, 4));
                     } else if (action === 'delete') {
                         // Delete last predicted word.
                         setText(currentText => removeLastWord(currentText))
