@@ -22,8 +22,9 @@ const Keyboard = () => {
         console.log('Sending request!')
         const payload = {
             prompt: "Hello what is your",
-            trace: trace
+            trace: [...trace.current]
         }
+        trace.current = [];
         axios.post("/api/predict/", payload)
             .then(
                 (response) => {
@@ -31,12 +32,7 @@ const Keyboard = () => {
                 }
             )
             .catch(
-                error => alert('Request failed!')
-            )
-            .finally(
-                () => {
-                    trace.current = [];
-                }
+                error => console.log('Request failed!')
             )
     }
 
