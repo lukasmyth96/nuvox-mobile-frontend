@@ -24,7 +24,7 @@ const Keyboard = () => {
     // Get prediction
     if (!mouse.isDown && trace.current.length > 0) {
         const payload = {
-            prompt: "",
+            prompt: text,
             trace: [...trace.current]
         }
         trace.current = [];
@@ -33,7 +33,7 @@ const Keyboard = () => {
                 (response) => {
                     const predictedWord = response.data.predicted_words[0];
                     console.log(predictedWord);
-                    setText(currentText => `${currentText} ${predictedWord}`)
+                    setText(currentText => currentText + predictedWord);
                 }
             )
             .catch(
