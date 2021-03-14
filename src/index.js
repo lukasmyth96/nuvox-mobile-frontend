@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import './index.css';
-import MouseModeKeyboard from './pages/MouseModeKeyboard';
+import MouseModeKeyboard from './pages/MouseMode';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
