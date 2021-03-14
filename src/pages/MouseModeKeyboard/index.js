@@ -1,13 +1,9 @@
 import React, {useRef, useState} from "react";
 import useMouse from "@react-hook/mouse-position";
-import Grid from '@material-ui/core/Grid';
 
 import axios from "../../axiosInstance";
 import {replaceLastWord, removeLastWord} from "../../utils";
-import styles from './MouseModeKeyboard.module.css'
-import TextBox from "../../components/TextBox";
-import Suggestions from "../../components/Suggestions";
-import SwipeKeyPad from "../../components/SwipeKeyPad";
+import Keyboard from "../../components/Keyboard";
 
 const MouseModeKeyboard = () => {
     let [text, setText] = useState("");
@@ -35,7 +31,7 @@ const MouseModeKeyboard = () => {
                     if (action === 'type') {
                         // Add predicted word to sentence.
                         const predictedWords = response.data.predicted_words;
-                        if (predictedWords.length){
+                        if (predictedWords.length) {
                             setText(currentText => currentText + predictedWords[0]);
                             setSuggestions(predictedWords.slice(1, 4));
                         }
@@ -61,24 +57,14 @@ const MouseModeKeyboard = () => {
     }
 
     return (
-        <div className={styles.keyboardContainer}>
-            <Grid
-                container
-                direction="column"
-                justify="space-evenly"
-                alignItems="stretch"
-                spacing={1}>
-                <TextBox
-                    textValue={text}/>
-                <Suggestions
-                    suggestions={suggestions}
-                    onSuggestionClicked={(suggestion) => setText(currentText => replaceLastWord(currentText, suggestion))}/>
-                <SwipeKeyPad
-                    mouse={mouse}
-                    mouseTrailPoints={mouseTrailPoints}
-                    useMouseTarget={useMouseTarget}/>
-            </Grid>
-        </div>
+        <Keyboard
+            text={text}
+            suggestions={suggestions}
+            onSuggestionClicked={(suggestion) => setText(currentText => replaceLastWord(currentText, suggestion))}
+            mouse={mouse}
+            mouseTrailPoints={mouseTrailPoints}
+            useMouseTarget={useMouseTarget}
+        />
     );
 }
 
