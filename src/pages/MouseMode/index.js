@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import useMouse from "@react-hook/mouse-position";
 
 import axios from "../../axiosInstance";
-import {replaceLastWord, removeLastWord} from "../../utils";
+import {replaceLastWord, removeLastWord} from "../../utils/string_funcs";
 import Keyboard from "../../components/Keyboard";
 
 const MouseModeKeyboard = () => {
