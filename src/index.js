@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import './index.css';
-import Keyboard from './pages/Keyboard';
+import MouseModeKeyboard from './pages/MouseModeKeyboard';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Switch>
-              <Route path='/' component={Keyboard} />
+              <Route path='/' component={MouseModeKeyboard} />
             </Switch>
         </BrowserRouter>
     </React.StrictMode>,

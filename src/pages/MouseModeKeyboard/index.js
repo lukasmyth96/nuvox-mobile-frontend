@@ -9,7 +9,7 @@ import TextBox from "../../components/TextBox";
 import Suggestions from "../../components/Suggestions";
 import SwipeKeyPad from "../../components/SwipeKeyPad";
 
-const Keyboard = () => {
+const MouseModeKeyboard = () => {
     let [text, setText] = useState("");
     let [suggestions, setSuggestions] = useState([]);
     let trace = useRef([]);
@@ -82,4 +82,4 @@ const Keyboard = () => {
     );
 }
 
-export default Keyboard;
+export default MouseModeKeyboard;
