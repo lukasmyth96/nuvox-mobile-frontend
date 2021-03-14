@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 
 import axios from "../../axiosInstance";
 import {replaceLastWord, removeLastWord} from "../../utils";
-import styles from './Keyboard.module.css'
+import styles from './MouseModeKeyboard.module.css'
 import TextBox from "../../components/TextBox";
 import Suggestions from "../../components/Suggestions";
 import SwipeKeyPad from "../../components/SwipeKeyPad";
