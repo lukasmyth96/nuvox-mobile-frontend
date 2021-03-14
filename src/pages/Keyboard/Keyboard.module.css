@@ -10,13 +10,19 @@
 
 @media all and (min-width: 640px) and (max-width: 900px) {
   .keyboardContainer {
-   margin: 0 200px;
+   margin: 10px 200px;
   }
 }
 
 @media all and (min-width: 900px) and (max-width: 1200px) {
   .keyboardContainer {
-   margin: 0 300px;
+   margin: 10px 250px;
+  }
+}
+
+@media all and (min-width: 1200px) and (max-width: 1400px) {
+  .keyboardContainer {
+   margin: 10px 300px;
   }
 }
 

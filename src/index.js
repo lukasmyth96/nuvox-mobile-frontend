@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import './index.css';
-import Keyboard from './components/Keyboard';
+import Keyboard from './pages/Keyboard';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
