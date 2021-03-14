@@ -2,12 +2,16 @@ import React, {useRef, useState} from "react";
 import useMouse from "@react-hook/mouse-position";
 
 import axios from "../../axiosInstance";
+import useInterval from "../../hooks/useInterval";
 import {replaceLastWord, removeLastWord} from "../../utils/string_funcs";
+import keyAtPoint from "../../utils/key_at_point";
 import Keyboard from "../../components/Keyboard";
 
 const EyeTrackingModeKeyboard = () => {
     let [text, setText] = useState("");
     let [suggestions, setSuggestions] = useState([]);
+    let latestPoint = useRef(undefined);
+    let keyIdBuffer = useRef([]);
     let trace = useRef([]);
     let mouseTrailPoints = useRef([]);
     let useMouseTarget = useRef(null);
@@ -17,7 +21,7 @@ const EyeTrackingModeKeyboard = () => {
         leaveDelay: 0
     });
 
-    // Get prediction
+        // Get prediction
     if (!mouse.isDown && trace.current.length > 0) {
         const payload = {
             prompt: text,
@@ -46,14 +50,30 @@ const EyeTrackingModeKeyboard = () => {
             )
     }
 
-    if (mouse.isDown && (mouse.x !== null && mouse.y !== null)) {
-        trace.current.push(
+    let running = useRef(false);
+    const delay = 100; // ms
+    useInterval(
+        () => {
+            if (latestPoint.current !== undefined) {
+                trace.current.push(latestPoint.current);
+                keyIdBuffer.current.push(keyAtPoint(latestPoint.current.x, latestPoint.current.y).id);
+            }
+            console.log(keyIdBuffer.current);
+        }, running.current ? delay : null
+    );
+
+    if (mouse.isDown) {
+        running.current = true;
+        latestPoint.current =
             {
                 x: (mouse.x / mouse.elementWidth),
                 y: (mouse.y / mouse.elementHeight),
-                t: 0  // time is required but not currently used.
             }
-        )
+    } else {
+        running.current = false;
+        latestPoint.current = undefined;
+        trace.current = [];
+        keyIdBuffer.current = [];
     }
 
     return (

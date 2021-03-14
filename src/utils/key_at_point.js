@@ -1,14 +1,14 @@
 class Key {
-    constructor(id, x0, y0, x1, y1) {
+    constructor(id, x0, x1, y0, y1) {
         this.id = id;
         this.x0 = x0;
-        this.y0 = y0;
         this.x1 = x1;
+        this.y0 = y0;
         this.y1 = y1;
     }
 
     contains(x, y) {
-        return (this.x0 <= x <= this.x1) && (this.y0 <= y <= this.y1)
+        return (this.x0 <= x) && (x <= this.x1) && (this.y0 <= y) && (y <= this.y1)
     }
 }
 

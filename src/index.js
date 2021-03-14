@@ -4,13 +4,15 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import './index.css';
 import MouseModeKeyboard from './pages/MouseMode';
+import EyeTrackingModeKeyboard from "./pages/EyeTrackingMode";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Switch>
-              <Route path='/' component={MouseModeKeyboard} />
+              <Route path='/mouse' component={MouseModeKeyboard} />
+              <Route path='/eye' component={EyeTrackingModeKeyboard} />
             </Switch>
         </BrowserRouter>
     </React.StrictMode>,
